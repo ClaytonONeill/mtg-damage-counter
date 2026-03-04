@@ -1,33 +1,45 @@
 // Modules
-import { useState } from 'react';
+import { useState } from "react";
 
 // Styles
-import './App.css';
+import "./App.css";
 
 // Pages
-import PromptPage from './features/prompt/pages/PromptPage';
+import PromptPage from "./features/prompt/pages/PromptPage";
+import PlayerCustomizationPage from "./features/player-customization/pages/PlayerCustomizationPage";
 
 // Types
-import type { GameConfigOptions } from './types/app.types';
+import type { GameConfigOptions } from "./types/app.types";
 
 function App() {
   // State
   const [gameConfigOptions, setGameConfigOptions] = useState<GameConfigOptions>(
     { numberOfPlayers: null, startingLife: null },
   );
+  const [appView, setAppView] = useState("prompt");
 
   const isConfigComplete =
     gameConfigOptions.numberOfPlayers !== null &&
     gameConfigOptions.startingLife !== null;
 
+  const determineAppView = () => {
+    switch (true) {
+      case appView === "prompt":
+        return (
+          <PromptPage
+            gameConfigOptions={gameConfigOptions}
+            handleSetOptions={setGameConfigOptions}
+          />
+        );
+      case appView === "customization":
+        return <PlayerCustomizationPage />;
+    }
+  };
+
   return (
     <div className="app-container">
       {isConfigComplete ? (
-        <>
-          <h1 className="text-2xl font-bold">Game Starting Soon...</h1>
-          <h2>Number of players {gameConfigOptions.numberOfPlayers}</h2>
-          <h3>Starting life {gameConfigOptions.startingLife}</h3>
-        </>
+        <PlayerCustomizationPage />
       ) : (
         <PromptPage
           gameConfigOptions={gameConfigOptions}
