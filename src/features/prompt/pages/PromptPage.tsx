@@ -1,6 +1,6 @@
 // Modules
 import { useState } from "react";
-import { useGame } from "@/context/GameContext";
+import { useGame } from "@/context/useGame";
 
 // Types
 import type { GameConfigOptions } from "@/types/app.types";

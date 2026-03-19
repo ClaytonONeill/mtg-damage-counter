@@ -2,7 +2,7 @@
 import "./App.css";
 
 // Context Hook
-import { useGame } from "./context/GameContext";
+import { useGame } from "./context/useGame";
 
 // Pages
 import PromptPage from "./features/prompt/pages/PromptPage";

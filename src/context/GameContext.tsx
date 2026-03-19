@@ -1,21 +1,12 @@
 // Modules
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
 
 // Types
 import type { ReactNode } from "react";
-import type { GameConfigOptions } from "@/types/app.types";
+import type { GameConfigOptions, Step } from "@/types/app.types";
 
-export type Step = "PROMPT" | "CUSTOMIZE" | "GO_FIRST" | "GAME";
-
-interface GameContextType {
-  step: Step;
-  config: GameConfigOptions;
-  setStep: (step: Step) => void;
-  // This handles the transition from Prompt -> Customization
-  completeConfiguration: (finalConfig: GameConfigOptions) => void;
-}
-
-const GameContext = createContext<GameContextType | undefined>(undefined);
+// Context
+import { GameContext } from "./useGame";
 
 export function GameProvider({ children }: { children: ReactNode }) {
   const [step, setStep] = useState<Step>("PROMPT");
@@ -26,7 +17,7 @@ export function GameProvider({ children }: { children: ReactNode }) {
 
   const completeConfiguration = (finalConfig: GameConfigOptions) => {
     setConfig(finalConfig);
-    setStep("CUSTOMIZE"); // Automatically move to next page
+    setStep("CUSTOMIZE");
   };
 
   return (
@@ -37,9 +28,3 @@ export function GameProvider({ children }: { children: ReactNode }) {
     </GameContext.Provider>
   );
 }
-
-export const useGame = () => {
-  const context = useContext(GameContext);
-  if (!context) throw new Error("useGame must be used within GameProvider");
-  return context;
-};
