@@ -1,5 +1,5 @@
 export type GameConfigOptions = {
-  numberOfPlayers: number | null;
+  numberOfPlayers: number;
   startingLife: number | null;
 };
 

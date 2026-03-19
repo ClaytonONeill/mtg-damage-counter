@@ -9,7 +9,7 @@ import type { GameConfigOptions, Step } from "@/types/app.types";
 import { GameContext } from "./useGame";
 
 export function GameProvider({ children }: { children: ReactNode }) {
-  const [step, setStep] = useState<Step>("GO_FIRST");
+  const [step, setStep] = useState<Step>("PROMPT");
   const [config, setConfig] = useState<GameConfigOptions>({
     numberOfPlayers: null,
     startingLife: null,
