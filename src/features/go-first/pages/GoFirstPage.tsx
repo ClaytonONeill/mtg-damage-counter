@@ -1,7 +1,13 @@
-// GoFirstPage.tsx
+// Modules
 import { useState } from "react";
-import RandomSelectionCard from "../components/RandomSelectionCard";
+
+// Context
 import { useGame } from "@/context/useGame";
+
+// Components
+import RandomSelectionCard from "../components/RandomSelectionCard";
+
+// UI
 import {
   Card,
   CardHeader,
@@ -12,7 +18,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 export default function GoFirstPage() {
-  const { config } = useGame();
+  const { config, goToGameBoard } = useGame();
   const [winnerIndex, setWinnerIndex] = useState<number | null>(null);
   const [highlightIndex, setHighlightIndex] = useState<number | null>(null);
   const [isRunning, setIsRunning] = useState(false);
@@ -57,7 +63,7 @@ export default function GoFirstPage() {
   };
 
   return (
-    <Card className="max-w-4xl mx-auto border-none shadow-none bg-transparent">
+    <Card className="max-w-4xl mx-auto  bg-transparent">
       <CardHeader className="text-center">
         <CardTitle className="text-2xl">
           Who goes <span className="text-indigo-600">First?</span>
@@ -77,14 +83,25 @@ export default function GoFirstPage() {
       </CardContent>
 
       <CardFooter className="p-6 flex justify-center">
-        <Button
-          size="lg"
-          onClick={handlePickWinner}
-          disabled={isRunning}
-          className="w-48 font-bold hover:cursor-pointer shadow-lg"
-        >
-          {isRunning ? "Picking..." : "GO"}
-        </Button>
+        {hasRun ? (
+          <Button
+            size="lg"
+            onClick={goToGameBoard}
+            disabled={isRunning}
+            className="w-48 font-bold hover:cursor-pointer shadow-lg bg-indigo-500 hover:bg-indigo-600"
+          >
+            Continue
+          </Button>
+        ) : (
+          <Button
+            size="lg"
+            onClick={handlePickWinner}
+            disabled={isRunning}
+            className="w-48 font-bold hover:cursor-pointer shadow-lg"
+          >
+            {isRunning ? "Picking..." : "GO"}
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );

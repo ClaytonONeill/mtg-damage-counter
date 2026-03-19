@@ -15,6 +15,7 @@ function App() {
     <div className="app-container">
       {step === "PROMPT" && <PromptPage />}
       {step === "GO_FIRST" && <GoFirstPage />}
+      {step === "GAME" && <h1>Game </h1>}
       {/* GoFirst and Game views follow the same pattern */}
     </div>
   );

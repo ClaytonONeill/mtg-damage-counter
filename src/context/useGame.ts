@@ -10,6 +10,7 @@ interface GameContextType {
   setStep: (step: Step) => void;
   // This handles the transition from Prompt -> Customization
   completeConfiguration: (finalConfig: GameConfigOptions) => void;
+  goToGameBoard: () => void;
 }
 
 export const GameContext = createContext<GameContextType | undefined>(

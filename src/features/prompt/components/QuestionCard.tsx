@@ -1,8 +1,8 @@
 // Modules
-import { useState, type ChangeEvent } from 'react';
+import { useState, type ChangeEvent } from "react";
 
 // UI
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,11 +10,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 // Types
-import type { QuestionCardProps, OptionType } from '../types/prompt.types';
+import type { QuestionCardProps, OptionType } from "../types/prompt.types";
 
 export default function QuestionCard({
   title,
@@ -29,15 +29,17 @@ export default function QuestionCard({
     initialValue ?? null,
   );
   const [customInput, setCustomInput] = useState<string>(
-    typeof initialValue === 'number' && !options.includes(initialValue)
+    typeof initialValue === "number" &&
+      initialValue &&
+      !options.includes(initialValue)
       ? String(initialValue)
-      : '',
+      : "",
   );
 
   // Methods
   const handleSelect = (option: OptionType) => {
     setSelectedOption((prev) => (prev === option ? null : option));
-    setCustomInput(''); // Clear custom input if a preset is picked
+    setCustomInput(""); // Clear custom input if a preset is picked
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,10 +47,10 @@ export default function QuestionCard({
     const { value } = e.target;
 
     // Validation: Only allow numeric input
-    if (value !== '' && !numRegex.test(value)) return;
+    if (value !== "" && !numRegex.test(value)) return;
 
     setCustomInput(value);
-    setSelectedOption(value === '' ? null : Number(value));
+    setSelectedOption(value === "" ? null : Number(value));
   };
 
   return (
@@ -64,7 +66,7 @@ export default function QuestionCard({
         {options.map((option) => (
           <Button
             key={option}
-            variant={selectedOption === option ? 'default' : 'secondary'}
+            variant={selectedOption === option ? "default" : "secondary"}
             className="hover:cursor-pointer"
             onClick={() => handleSelect(option)}
           >
@@ -87,7 +89,7 @@ export default function QuestionCard({
           <Button
             variant="secondary"
             className="hover:cursor-pointer"
-            onClick={() => handleClick('back')}
+            onClick={() => handleClick("back")}
           >
             Go Back
           </Button>
@@ -95,9 +97,9 @@ export default function QuestionCard({
 
         <Button
           variant="default" // Changed to default to highlight the primary action
-          className="ml-auto hover:cursor-pointer"
+          className="ml-auto hover:cursor-pointer bg-indigo-500 hover:bg-indigo-600"
           disabled={selectedOption === null}
-          onClick={() => handleClick('submit', Number(selectedOption))}
+          onClick={() => handleClick("submit", Number(selectedOption))}
         >
           Submit
         </Button>

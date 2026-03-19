@@ -11,7 +11,7 @@ import { GameContext } from "./useGame";
 export function GameProvider({ children }: { children: ReactNode }) {
   const [step, setStep] = useState<Step>("PROMPT");
   const [config, setConfig] = useState<GameConfigOptions>({
-    numberOfPlayers: null,
+    numberOfPlayers: 0,
     startingLife: null,
   });
 
@@ -20,9 +20,13 @@ export function GameProvider({ children }: { children: ReactNode }) {
     setStep("GO_FIRST");
   };
 
+  const goToGameBoard = () => {
+    setStep("GAME");
+  };
+
   return (
     <GameContext.Provider
-      value={{ step, config, setStep, completeConfiguration }}
+      value={{ step, config, setStep, completeConfiguration, goToGameBoard }}
     >
       {children}
     </GameContext.Provider>
