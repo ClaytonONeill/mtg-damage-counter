@@ -3,4 +3,4 @@ export type GameConfigOptions = {
   startingLife: number | null;
 };
 
-export type Step = "PROMPT" | "CUSTOMIZE" | "GO_FIRST" | "GAME";
+export type Step = "PROMPT" | "GO_FIRST" | "CUSTOMIZE" | "GAME";

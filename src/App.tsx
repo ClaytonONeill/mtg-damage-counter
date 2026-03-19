@@ -6,6 +6,7 @@ import { useGame } from "./context/useGame";
 
 // Pages
 import PromptPage from "./features/prompt/pages/PromptPage";
+import GoFirstPage from "./features/go-first/pages/GoFirstPage";
 
 function App() {
   const { step } = useGame();
@@ -13,7 +14,7 @@ function App() {
   return (
     <div className="app-container">
       {step === "PROMPT" && <PromptPage />}
-      {step === "CUSTOMIZE" && <h1>Customize</h1>}
+      {step === "GO_FIRST" && <GoFirstPage />}
       {/* GoFirst and Game views follow the same pattern */}
     </div>
   );
